@@ -43,10 +43,10 @@
 						pattern="dd/MM/yyyy" /></td>
 				<td><fmt:formatDate value="${vol.heureDepart}" pattern="HH:mm" /></td>
 				<td><fmt:formatDate value="${vol.heureArrivee}" pattern="HH:mm" /></td>
-				<c:forEach var="resa" items="${reservations}">
-					<td><${resa.numeroReservation}</td>
-				</c:forEach>
-
+<%-- 				<td><c:forEach var="resa" items="${reservations}"> --%>
+<%-- 					${resa.numeroReservation} --%>
+<%-- 				</c:forEach></td> --%>
+				<td><a class="btn btn-warning" href="./findResa?id=${vol.idVol}">Réservations </a></td>
 				<td><a class="btn btn-info" href="./edit?id=${vol.idVol }">Editer</a></td>
 				<td><a class="btn btn-danger" href="./delete?id=${vol.idVol }">Supprimer</a></td>
 				<!--  il ne faut afficher certaines parties de code qu'à certaines conditions : cout si formateur, ordi et entreprise si stagiaire... -->

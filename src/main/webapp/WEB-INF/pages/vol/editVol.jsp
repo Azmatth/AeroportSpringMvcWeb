@@ -62,15 +62,20 @@
 				<%-- 									<form:label path="reservations">reservations : </form:label> --%>
 				<%-- 									<form:input path="reservations" cssClass="form-control" /> --%>
 				<!-- 								</div> -->
-				<div class="form-group">
-					<form:label path="reservations">reservations : </form:label>
-					<form:select path="reservations" cssClass="form-control">
-						<form:option value="">Pas de réservation</form:option>
-						<form:options items="${reservations}" itemLabel="passager"
-							itemValue="numeroReservation" />
-					</form:select>
-					<form:errors path="reservations"></form:errors>
-				</div>
+				<!-- 				<div class="form-group"> -->
+				<%-- 					<form:label path="reservations">reservations : </form:label> --%>
+				<%-- 					<form:select path="reservations" cssClass="form-control"> --%>
+				<%-- 						<form:option value="">Pas de réservation</form:option> --%>
+				<%-- 						<form:options items="${reservations}" itemLabel="passager" --%>
+				<%-- 							itemValue="numeroReservation" /> --%>
+				<%-- 					</form:select> --%>
+				<%-- 					<form:errors path="reservations"></form:errors> --%>
+				<!-- 				</div> -->
+
+
+
+
+
 				<div>
 					<button class="btn btn-success" type="submit">Sauvegarder</button>
 					<a class="btn btn-danger" href="./">Annuler</a>
