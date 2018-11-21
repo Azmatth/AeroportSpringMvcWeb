@@ -15,59 +15,72 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.Reservation;
+import service.ClientService;
+import service.PassagerService;
 import service.ReservationService;
-
 
 @Controller
 @RequestMapping("/reservation")
 public class ReservationController {
 
-		@Autowired
-		private ReservationService reservationService;
+	@Autowired
+	private ReservationService reservationService;
 
-		@RequestMapping("")
-		public ModelAndView home() {
-			return new ModelAndView("redirect:/reservation/");
-		}
-		
-		@GetMapping("/")
-		public ModelAndView listReservation() {
-			ModelAndView modelAndView= new ModelAndView("/reservation/listReservation", "reservations", reservationService.showAll());
+	@Autowired
+	private PassagerService passagerService;
+
+	@Autowired
+	private ClientService clientService;
+
+	@RequestMapping("")
+	public ModelAndView home() {
+		return new ModelAndView("redirect:/reservation/");
+	}
+
+	@GetMapping("/")
+	public ModelAndView listReservation() {
+		ModelAndView modelAndView = new ModelAndView("reservations/listReservation", "reservations",
+				reservationService.showAll());
+		return modelAndView;
+	}
+
+	@GetMapping("/delete")
+	public ModelAndView deleteReservation(
+			@RequestParam(name = "numeroReservation", required = true) Integer numeroReservation) {
+		reservationService.deleteReservation(numeroReservation);
+		return new ModelAndView("redirect:/reservation/");
+	}
+
+	@GetMapping("/editReservation")
+	public ModelAndView editReservation(
+			@RequestParam(name = "numeroReservation", required = true) Integer numeroReservation) {
+		Reservation reservation = reservationService.showReservation(numeroReservation);
+		return goEditReservation(reservation);
+	}
+
+	@GetMapping("/addReservation")
+	public ModelAndView addReservation() {
+		return goEditReservation(new Reservation());
+	}
+
+	private ModelAndView goEditReservation(Reservation reservation) {
+			ModelAndView modelAndView = new ModelAndView("reservations/editReservation", "reservation", reservation);
+			modelAndView.addObject("passager", passagerService.);
+			modelAndView.addObject("client", clientService.);
 			return modelAndView;
 		}
-		
-		@GetMapping("/delete")
-		public ModelAndView delete(@RequestParam(name = "numeroReservation", required = true) Integer numeroReservation) {
-			reservationService.deleteReservation(numeroReservation);
-			return new ModelAndView("redirect:/reservation/");
-		}
 
-		@GetMapping("/editReservation")
-		public ModelAndView edit(@RequestParam(name = "numeroReservation", required = true) Integer numeroReservation) {
-			Reservation reservation = reservationService.showReservation(numeroReservation);
-			return new ModelAndView("reservation/editReservation", "reservation", reservation);
+	@GetMapping("/saveReservation")
+	public ModelAndView saveReservation(@Valid @ModelAttribute("reservation") Reservation reservation,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return goEditReservation(reservation);
 		}
-
-		@GetMapping("/addReservation")
-		public ModelAndView addReservation() {
-			return goEditReservation(new Reservation());
+		if (reservation.getNumeroReservation() == null) {
+			addReservation();
+		} else {
+			reservationService.modifyReservation(reservation.getNumeroReservation());
 		}
-
-		private ModelAndView goEditReservation(Reservation reservation) {
-			ModelAndView modelAndView = new ModelAndView("reservation/editReservation", "reservation", reservation);
-			return modelAndView;
-		}
-		
-		@PostMapping("/saveReservation")
-		public ModelAndView saveReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult result) {
-			if (result.hasErrors()) {
-				return goEditReservation(reservation);
-			}
-			if (reservation.getNumeroReservation() == null) {
-				addReservation();
-			} else {
-				reservationService.modifyReservation(reservation.getNumeroReservation());
-			}
-			return new ModelAndView("redirect:/reservation/");
-		}
+		return new ModelAndView("redirect:/reservation/");
+	}
 }

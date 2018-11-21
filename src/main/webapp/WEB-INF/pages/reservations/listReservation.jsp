@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>listSalles</title>
+<title>listReservation</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
@@ -19,20 +19,22 @@
 			<th></th>
 			<th></th>
 		</tr>
-		<c:forEach var="salle" items="${reservations}">
+		<c:forEach var="reservation" items="${reservations}">
 			<tr>
 				<td>${reservation.numeroReservation}</td>
 				<td><fmt:formatDate value="${reservation.dateReservation}"
-						pattern="dd/MM/yyyy" /></td>
+						pattern="yyyy/MM/dd" /></td>
+				<%-- <td><fmt:formatDate value="${reservation.heureReservation}"
+						pattern="HH:mm" /></td> --%>
 				<td><a class="btn btn-warning"
-					href="./edit?numeroReservation=${reservation.numeroReservation}">Edit</a></td>
+					href="./editReservation?numeroReservation=${reservation.numeroReservation}">Edit</a></td>
 				<td><a class="btn btn-danger"
-					href="./deleteSalle?numeroReservation=${reservation.numeroReservation}">Delete</a></td>
+					href="./deleteReservation?numeroReservation=${reservation.numeroReservation}">Delete</a></td>
 
 			</tr>
 		</c:forEach>
 	</table>
-	<a class="btn btn-success" href="./addSalle">New Salle</a>
+	<a class="btn btn-success" href="./addReservation">New Reservation</a>
 
 
 </body>
