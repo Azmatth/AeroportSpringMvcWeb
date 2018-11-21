@@ -1,37 +1,37 @@
-<%@page import="javax.servlet.descriptor.TaglibDescriptor"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Liste des personnes</title>
+<meta charset="UTF-8">
+<title>listReservation</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-
-	<table class="table">
-		<tr>
-			<th>idVol</th>
-			<th>aeroportDepart</th>
-			<th>aeroportArrivee</th>
-			<th>dateDepart</th>
-			<th>dateArrivee</th>
-			<th>heureDepart</th>
-			<th>heureArrivee</th>
-			<th>Reservations</th>
-		</tr>
-		<tr>
-
-		</tr>
-	</table>
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>Numéro de la réservation</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <c:forEach var="reservation" items="${reservations}">
+            <tr>
+                <td>${reservation.numeroReservation}</td>
+                <td><fmt:formatDate value="${reservation.dateReservation}"
+                        pattern="yyyy/MM/dd" /></td>
+                <%-- <td><fmt:formatDate value="${reservation.heureReservation}"
+                        pattern="HH:mm" /></td> --%>
+                <td><a class="btn btn-warning"
+                    href="./editReservation?numeroReservation=${reservation.numeroReservation}">Edit</a></td>
+                <td><a class="btn btn-danger"
+                    href="./deleteReservation?numeroReservation=${reservation.numeroReservation}">Delete</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <a class="btn btn-success" href="./addReservation">New Reservation</a>
 </body>
 </html>
