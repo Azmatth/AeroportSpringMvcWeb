@@ -63,6 +63,13 @@ public class VolController {
 		return goEdit(new Vol());
 	}
 
+	
+	@GetMapping("/reservations")
+	public ModelAndView findResa(Vol vol) {
+		ModelAndView modelAndView = new ModelAndView("vol/reservations", "reservations", volservice.showReservationByVol(vol.getIdVol())); 
+		return modelAndView;
+	}
+	
 	private ModelAndView goEdit(Vol vol) {
 		ModelAndView modelAndView = new ModelAndView("vol/editVol", "vol", vol);
 		modelAndView.addObject("aeroports", aeroService.findAllAeroports());
