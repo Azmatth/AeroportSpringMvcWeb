@@ -26,11 +26,11 @@ public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
 
-	@Autowired
-	private PassagerService passagerService;
-
-	@Autowired
-	private ClientService clientService;
+//	@Autowired
+//	private PassagerService passagerService;
+//
+//	@Autowired
+//	private ClientService clientService;
 
 	@RequestMapping("")
 	public ModelAndView home() {
@@ -44,7 +44,7 @@ public class ReservationController {
 		return modelAndView;
 	}
 
-	@GetMapping("/delete")
+	@GetMapping("/deleteReservation")
 	public ModelAndView deleteReservation(
 			@RequestParam(name = "numeroReservation", required = true) Integer numeroReservation) {
 		reservationService.deleteReservation(numeroReservation);
@@ -54,6 +54,7 @@ public class ReservationController {
 	@GetMapping("/editReservation")
 	public ModelAndView editReservation(
 			@RequestParam(name = "numeroReservation", required = true) Integer numeroReservation) {
+		
 		Reservation reservation = reservationService.showReservation(numeroReservation);
 		return goEditReservation(reservation);
 	}
@@ -65,8 +66,8 @@ public class ReservationController {
 
 	private ModelAndView goEditReservation(Reservation reservation) {
 			ModelAndView modelAndView = new ModelAndView("reservations/editReservation", "reservation", reservation);
-			modelAndView.addObject("passager", passagerService.);
-			modelAndView.addObject("client", clientService.);
+//			modelAndView.addObject("passager", passagerService.findPassagerById(idPassager));
+//			modelAndView.addObject("client", clientService.);
 			return modelAndView;
 		}
 
@@ -76,11 +77,7 @@ public class ReservationController {
 		if (result.hasErrors()) {
 			return goEditReservation(reservation);
 		}
-		if (reservation.getNumeroReservation() == null) {
-			addReservation();
-		} else {
-			reservationService.modifyReservation(reservation.getNumeroReservation());
-		}
+		reservationService.createReservation(reservation);
 		return new ModelAndView("redirect:/reservation/");
 	}
 }
