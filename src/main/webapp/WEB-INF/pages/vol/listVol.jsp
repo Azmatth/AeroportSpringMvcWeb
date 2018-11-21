@@ -3,7 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,41 +20,42 @@
 
 	<table class="table">
 		<tr>
-			<th>id</th>
-			<th><spring:message  code="personne.list.prenom"></spring:message></th>
-			<th><spring:message  code="personne.list.nom"></spring:message></th>
-			<th> Date de naissance</th>
-			<th>cout</th>
-			<th>Entreprise</th>
-			<th>Salle</th>
-			<th>Editer </th>
-			<th> Supprimer</th>
+			<th>idVol</th>
+			<th>aeroportDepart</th>
+			<th>aeroportArrivee</th>
+			<th>dateDepart</th>
+			<th>dateArrivee</th>
+			<th>heureDepart</th>
+			<th>heureArrivee</th>
+			<th>Reservations</th>
+			<th>Editer</th>
+			<th>Supprimer</th>
 
 		</tr>
-		<c:forEach var="personne" items="${personnes}">
+		<c:forEach var="vol" items="${vols}">
 			<tr>
-				<td>${personne.id }</td>
-				<td>${personne.prenom }</td>
-				<td>${personne.nom }</td>
-				<td><fmt:formatDate value="${personne.dtNaiss}" pattern="dd/MM/yyyy"/></td> 
-				
-				<td><c:if test="${personne.getClass().name=='formation_model.Formateur'}">${personne.cout}</c:if>
-				</td>
-				<td><c:if test="${personne.getClass().simpleName=='Stagiaire'}"> ${personne.entreprise}</c:if>
-				</td>
-				<td>${personne.salle.numero }</td>
-				<td><a class="btn btn-info" href="./edit?id=${personne.id }">Editer</a></td>
-				<td><a class="btn btn-danger" href="./delete?id=${personne.id }">Supprimer</a></td>
-				
-				
+				<td>${vol.idVol }</td>
+				<td>${vol.aeroportDepart.idAeroport }</td>
+				<td>${vol.aeroportArrivee.idAeroport }</td>
+				<td><fmt:formatDate value="${vol.dateDepart}"
+						pattern="dd/MM/yyyy" /></td>
+				<td><fmt:formatDate value="${vol.dateArrivee}"
+						pattern="dd/MM/yyyy" /></td>
+				<td><fmt:formatDate value="${vol.heureDepart}" pattern="HH:mm" /></td>
+				<td><fmt:formatDate value="${vol.heureArrivee}" pattern="HH:mm" /></td>
+				<c:forEach var="resa" items="${reservations}">
+					<td><${resa.numeroReservation}</td>
+				</c:forEach>
+
+				<td><a class="btn btn-info" href="./edit?id=${vol.idVol }">Editer</a></td>
+				<td><a class="btn btn-danger" href="./delete?id=${vol.idVol }">Supprimer</a></td>
 				<!--  il ne faut afficher certaines parties de code qu'à certaines conditions : cout si formateur, ordi et entreprise si stagiaire... -->
 			</tr>
 		</c:forEach>
- 
+
 	</table>
 
-	<a class="btn btn-success" href="addFormateur">New Formateur</a>
-	<a class="btn btn-success" href="addStagiaire">New Stagiaire</a>
+	<a class="btn btn-success" href="addVol">New Vol</a>
 
 </body>
 </html>
