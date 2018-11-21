@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Formulaire vol</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -15,103 +15,77 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>	
-
-	<c:choose>
-		<c:when test="${personne.getClass().simpleName=='Formateur' }">
-			<c:url value="saveFormateur" var="action"></c:url>
-		</c:when>
-
-		<c:otherwise>
-			<c:url value="saveStagiaire" var="action"></c:url>
-		</c:otherwise>
-	</c:choose>
-
-
+<body>
 
 	<div class="container">
 		<fieldset>
-			<legend> edition de personne</legend>
-			<form:form action="${action}" method="get" modelAttribute="personne">
+			<legend> edition de vol</legend>
+			<form:form action="saveVol" method="get" modelAttribute="vol">
 				<form:hidden path="version" readonly="readonly" />
 				<div class="form-group">
-					<form:label path="id">id</form:label>
-					<form:input path="id" readonly="true" cssClass="form-control"/>
+					<form:label path="idVol">idVol : </form:label>
+					<form:input path="idVol" cssClass="form-control" readonly="true" />
 				</div>
-				<div class="form-group">
-					<form:label path="titre">titre : </form:label>
-					<form:select path="titre" items="${titres}" itemLabel="titre"
-						cssClass="form-control"></form:select>
-				</div>
-				<div class="form-group">
-					<form:label path="prenom">prenom : </form:label>
-					<form:input path="prenom" cssClass="form-control" />
-					<form:errors path="prenom"></form:errors>
-				</div>
-				<div class="form-group">
-					<form:label path="nom">Nom : </form:label>
-					<form:input path="nom" cssClass="form-control" />
-					<form:errors path="nom"></form:errors>
-				</div>
-				<div class="form-group">
-					<form:label path="dtNaiss">Date de naissance : </form:label>
-					<form:input type="date" path="dtNaiss" cssClass="form-control" />
-					<form:errors path="dtNaiss"></form:errors>
-				</div>
-				<div class="form-group">
-					<c:choose>
-						<c:when test="${personne.getClass().simpleName=='Formateur' }">
-							<form:label path="cout"> Cout : </form:label>
-							<form:input path="cout" cssClass="form-control"></form:input>
-							<form:errors path="cout"></form:errors>
-						</c:when>
-						<c:otherwise>
-							<form:label path="entreprise"> entreprise : </form:label> 
-							<form:input path="entreprise" cssClass="form-control"></form:input> 
-							<form:errors path="salle"></form:errors>
 
-						</c:otherwise>
 
-					</c:choose>
+				<div class="form-group">
+					<form:label path="aeroportDepart.idAeroport">aeroportDepart : </form:label>
+					<form:select path="aeroportDepart.idAeroport"
+						cssClass="form-control">
+						<form:option value="">Pas d'aeroport</form:option>
+						<form:options items="${aeroports}" itemLabel="nom"
+							itemValue="idAeroport" />
+					</form:select>
 				</div>
 				<div class="form-group">
-					<form:label path="salle.numero">Numero de salle : </form:label>
-							<form:select path="salle.numero" cssClass="form-control">
-								<form:option value="">Pas de salle</form:option>
-								<form:options items="${salles}" itemLabel="nom" itemValue="numero"  />
-							</form:select>
-					<form:errors path="salle.numero"></form:errors>
+					<form:label path="aeroportArrivee.idAeroport">aeroportArrivee  : </form:label>
+					<form:select path="aeroportArrivee.idAeroport" items="${aeroports}"
+						itemLabel="nom" itemValue="idAeroport" cssClass="form-control"></form:select>
 				</div>
+				<div class="form-group">
+					<form:label path="dateDepart">dateDepart : </form:label>
+					<form:input type="date" path="dateDepart" cssClass="form-control" />
+				</div>
+				<div class="form-group">
+					<form:label path="dateArrivee">dateArrivee : </form:label>
+					<form:input type="date" path="dateArrivee" cssClass="form-control" />
+				</div>
+				<div class="form-group">
+					<form:label path="heureDepart">heureDepart : </form:label>
+					<form:input type="time" path="heureDepart" cssClass="form-control" />
+				</div>
+				<div class="form-group">
+					<form:label path="heureArrivee">heureArrivee : </form:label>
+					<form:input type="time" path="heureArrivee" cssClass="form-control" />
+				</div>
+				<!-- 								<div class="form-group"> -->
+				<%-- 									<form:label path="reservations">reservations : </form:label> --%>
+				<%-- 									<form:input path="reservations" cssClass="form-control" /> --%>
+				<!-- 								</div> -->
+				<!-- 				<div class="form-group"> -->
+				<%-- 					<form:label path="reservations">reservations : </form:label> --%>
+				<%-- 					<form:select path="reservations" cssClass="form-control"> --%>
+				<%-- 						<form:option value="">Pas de réservation</form:option> --%>
+				<%-- 						<form:options items="${reservations}" itemLabel="passager" --%>
+				<%-- 							itemValue="numeroReservation" /> --%>
+				<%-- 					</form:select> --%>
+				<%-- 					<form:errors path="reservations"></form:errors> --%>
+				<!-- 				</div> -->
+
+
+
+				
+
 				<div>
 					<button class="btn btn-success" type="submit">Sauvegarder</button>
 					<a class="btn btn-danger" href="./">Annuler</a>
 					<!-- Remonte d'une page si annulation  -->
 				</div>
-				<!-- 			<div class="form-group"> -->
-				<%-- 				 <form:label path="adresse.numero">Numero : </form:label>  --%>
-				<%-- 				 <form:input type="Number" path ="adresse.numero" cssClass="form-control" />  --%>
-				<%-- 				 <form:errors path="adresse.numero"></form:errors>  --%>
-				<!-- 			</div>  -->
 
-				<!-- 			<div class="form-group"> -->
-				<%-- 				 <form:label path="adresse.rue">rue : </form:label>  --%>
-				<%-- 				 <form:input path ="adresse.rue" cssClass="form-control" />  --%>
-				<%-- 				 <form:errors path="adresse.rue"></form:errors>  --%>
-				<!-- 			</div>  -->
-				<!-- 			<div class="form-group"> -->
-				<%-- 				 <form:label path="adresse.codePostal">Code Postal : </form:label>  --%>
-				<%-- 				 <form:input type="Number" path ="adresse.codePostal" cssClass="form-control" />  --%>
-				<%-- 				 <form:errors path="adresse.codePostal"></form:errors>  --%>
-				<!-- 			</div>  -->
-				<!-- 			<div class="form-group"> -->
-				<%-- 				 <form:label path="adresse.ville"> ville : </form:label>  --%>
-				<%-- 				 <form:input  path ="adresse.ville" cssClass="form-control" />  --%>
-				<%-- 				 <form:errors path="adresse.ville"></form:errors>  --%>
-				<!-- 			</div>  -->
 			</form:form>
 		</fieldset>
 	</div>
 
- 
+
 </body>
 </html>
