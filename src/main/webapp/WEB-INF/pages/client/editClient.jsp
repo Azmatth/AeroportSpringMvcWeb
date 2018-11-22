@@ -37,7 +37,14 @@
 					<form:errors path="titre" cssClass="form-control"/>
 				</div>
 				<c:choose>
-					<c:when test="${client.getClass().simpleName=='ClientEl'||client.getClass().simpleName=='ClientPhysique'}">
+					<c:when test="${client.getClass().simpleName=='ClientEl'}">
+						<div class="form-group">
+							<form:label path="prenom">prenom</form:label>
+							<form:input path="prenom" cssClass="form-control" />
+							<form:errors path="prenom"></form:errors>
+						</div>
+					</c:when>
+					<c:when test="${client.getClass().simpleName=='ClientPhysique'}">
 						<div class="form-group">
 							<form:label path="prenom">prenom</form:label>
 							<form:input path="prenom" cssClass="form-control" />
@@ -61,6 +68,16 @@
 					<form:label path="mail">mail</form:label>
 					<form:input path="mail" cssClass="form-control" />
 					<form:errors path="mail"></form:errors>
+				</div>
+				<div class="form-group">
+					<form:label path="numeroTel">Telephone</form:label>
+					<form:input path="numeroTel" cssClass="form-control" />
+					<form:errors path="numeroTel"></form:errors>
+				</div>
+				<div class="form-group">
+					<form:label path="numeroFax">Fax</form:label>
+					<form:input path="numeroFax" cssClass="form-control" />
+					<form:errors path="numeroFax"></form:errors>
 				</div>
 				<div class="form-group">
 					<form:label path="adresse.adresse">adresse</form:label>

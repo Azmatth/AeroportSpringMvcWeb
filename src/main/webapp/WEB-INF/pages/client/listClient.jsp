@@ -35,17 +35,21 @@
 			<tr>
 				<td>${client.clientId}</td>
 				<td>${client.titre}</td>
-				<td><c:if
-						test="personne.getClass().simplename=='ClientEl'||personne.getClass().simplename=='ClientPhysique'">${client.prenom}</c:if>
-				</td>
-				<td><c:if 
-					test="personne.getClass().simpleName=='ClientMoral'">${client.siret}</c:if>
-					</td>
+				<c:choose>
+				<c:when
+						test="client.getClass().simplename=='ClientEl'"><td>${client.prenom}</td></c:when>
+				<c:when
+						test="client.getClass().simplename=='ClientPhysique'"><td>${client.prenom}</td></c:when>
+				
+	
+				<c:when
+					test="client.getClass().simpleName=='ClientMoral'"><td>${client.siret}</td></c:when>
+				</c:choose>
 				<td>${client.clientName}</td>
 				<td>${client.mail}</td>
 				<td>${client.numeroTel}</td>
 				<td>${client.numeroFax}</td>
-				<td>{personne.adresse.adresse}</td>
+				<td>{client.adresse.adresse}</td>
 				<td>${client.adresse.codePostal}</td>
 				<td>${client.adresse.ville}</td>
 				<td>${client.adresse.pays}</td>
