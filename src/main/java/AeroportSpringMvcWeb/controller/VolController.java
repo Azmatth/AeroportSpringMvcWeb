@@ -65,7 +65,7 @@ public class VolController {
 
 	
 	@GetMapping("/reservations")
-	public ModelAndView findResa(Vol vol) {
+	public ModelAndView reservations(Vol vol) {
 		ModelAndView modelAndView = new ModelAndView("vol/reservations", "reservations", volservice.showReservationByVol(vol.getIdVol())); 
 		return modelAndView;
 	}
