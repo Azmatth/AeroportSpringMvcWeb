@@ -20,7 +20,7 @@ import service.ReservationService;
 
 @Controller
 @RequestMapping("/client")
-public class CientController {
+public class ClientController {
 
 	@Autowired
 	private ClientService clientService;
