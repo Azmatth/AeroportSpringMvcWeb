@@ -10,6 +10,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+<!-- 	<mvc:resources mapping="/static/**" location="/WEB-INF/images/" /> -->
 	<!-- activation des annotations de spring mvc @Controller -->
 	<mvc:annotation-driven validator="validator"></mvc:annotation-driven>
 
@@ -21,8 +22,9 @@
 		<property name="prefix" value="/WEB-INF/pages/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-
+	
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"></bean>
+	
 
 </beans>

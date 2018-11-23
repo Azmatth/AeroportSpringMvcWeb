@@ -54,8 +54,11 @@
 		</c:forEach>
 
 	</table>
-
+	<div>
 	<a class="btn btn-success" href="addVol">New Vol</a>
-
+	</div>
+	<div align="center">
+		<a class="btn btn-warning" href="../accueil">Accueil</a>
+	</div>
 </body>
 </html>

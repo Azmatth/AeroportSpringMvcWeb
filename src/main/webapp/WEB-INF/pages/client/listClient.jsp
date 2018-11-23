@@ -37,19 +37,19 @@
 				<td>${client.titre}</td>
 				<c:choose>
 				<c:when
-						test="client.getClass().simplename=='ClientEl'"><td>${client.prenom}</td></c:when>
+						test="${client.getClass().simpleName=='ClientEl'}"><td>${client.prenom}</td></c:when>
 				<c:when
-						test="client.getClass().simplename=='ClientPhysique'"><td>${client.prenom}</td></c:when>
+						test="${client.getClass().simpleName=='ClientPhysique'}"><td>${client.prenom}</td></c:when>
 				
 	
 				<c:when
-					test="client.getClass().simpleName=='ClientMoral'"><td>${client.siret}</td></c:when>
+					test="${client.getClass().simpleName=='ClientMoral'}"><td>${client.siret}</td></c:when>
 				</c:choose>
 				<td>${client.clientName}</td>
 				<td>${client.mail}</td>
 				<td>${client.numeroTel}</td>
 				<td>${client.numeroFax}</td>
-				<td>{client.adresse.adresse}</td>
+				<td>${client.adresse.adresse}</td>
 				<td>${client.adresse.codePostal}</td>
 				<td>${client.adresse.ville}</td>
 				<td>${client.adresse.pays}</td>
@@ -59,9 +59,13 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+	<div>
 	<a class= "btn btn-success" href="./addClientPhy">Ajouter Client Physique</a>
 	<a class= "btn btn-success" href="./addClientMoral">Ajouter Client Moral</a>
 	<a class= "btn btn-success" href="./addClientEl">Ajouter Client El</a>
+	</div>
+	<div align="center">
+		<a class="btn btn-warning" href="../accueil">Accueil</a>
+	</div>
 </body>
 </html>

@@ -14,7 +14,7 @@
     <table class="table">
         <tr>
             <th>id</th>
-            <th>Numéro de la réservation</th>
+            <th>Date de la réservation</th>
             <th></th>
             <th></th>
         </tr>
