@@ -45,8 +45,11 @@
 			</tr>
 		</c:forEach>
 	</table>
-
-	<a class="btn btn-info" href="./addPassager">nouveau passager</a>
-
+	<div>
+		<a class="btn btn-info" href="./addPassager">nouveau passager</a>
+	</div>
+	<div align="center">
+		<a class="btn btn-warning" href="../accueil">Accueil</a>
+	</div>
 </body>
 </html>
